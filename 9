@@ -1,0 +1,52 @@
+import pandas as pd
+
+#init data
+data1 = {
+    'Make': ['utv/atv'],
+    'Model': ['All Model'],
+    'Vendor Code': ['NACH'],
+    'Vendor Name': ['NACHMAN INTERNATIONAL CO. LTD'],
+    
+    'MPN': ['AC-01973'],
+    
+    'AD LIST NUMBER': ['999815'],
+    
+    'VENDOR NOTES': ['"*** AT-01450 ALSO FITS ON MC/ MX APPLICATION, PLEASE INQUIRE FOR DETAILS. *** AC-01973 NOTE: THERE ARE TWO POSSILBLE STATORS FOR 04-05 SPORTSMAN 600 & 700 MACHINES, THIS ONE HAS 18 CHARGE POLES, THE OTHER HAS 11 CHARGE POLES, PLEASE ENSURE YOUR MACHINE HAS 18 CHARGING POLES. *** AC-01958 NOTE: 1995-99  YFM 350 WOLVERINE HAS TWO POSSIBLE STATORS, THIS STATOR HAS AND EXTERNAL DIAMETER OF 93MM.   ;OEM: 31120-HN5-M02, 31120-HN5-671, 31120-HN5-672, 31120-HN5-M01, 31120-HP5-601, 31120-HP5-A51, 31120-HN2-A21, 31120-HP5-601, 31120-HP5-A51, 31120-HN2-A21 " '],}
+
+
+#list all models
+list_models = [
+
+'Sportsman 600',
+'Sportsman 700',
+'Sportsman 700 EFI',
+'Sportsman 700 EFI X2',
+'Sportsman 700 MV',
+'Sportsman MV7'
+
+
+
+
+]
+
+#Range of Years
+years = list(range(2004, 2007))
+
+#Functions/Syntax to generate the Dataframe for each model
+
+def generate_df(model, data, year):
+    data_copy = data.copy()
+    data_copy['Model'] = model
+    data_copy['Year'] = year
+    return pd.DataFrame(data_copy)
+
+dfs=[]
+for year in years:
+    df1 = pd.concat([generate_df(model,data1, year) for model in list_models], ignore_index = True)
+    dfs.append(df1)
+    
+#Concatenate all DF's created
+final_df = pd.concat(dfs, ignore_index=True)
+
+#Display
+final_df
