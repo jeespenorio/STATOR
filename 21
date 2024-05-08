@@ -1,0 +1,174 @@
+import pandas as pd
+
+#init data
+data1 = {
+    'Make': ['utv/atv'],
+    'Model': ['All Model'],
+    'Vendor Code': ['NACH'],
+    'Vendor Name': ['NACHMAN INTERNATIONAL CO. LTD'],
+    
+    'MPN': ['AT-01476'],
+    
+    'AD LIST NUMBER': ['128111'],
+    
+    'VENDOR NOTES': ['"*** AT-01450 ALSO FITS ON MC/ MX APPLICATION, PLEASE INQUIRE FOR DETAILS. *** AC-01973 NOTE: THERE ARE TWO POSSILBLE STATORS FOR 04-05 SPORTSMAN 600 & 700 MACHINES, THIS ONE HAS 18 CHARGE POLES, THE OTHER HAS 11 CHARGE POLES, PLEASE ENSURE YOUR MACHINE HAS 18 CHARGING POLES. *** AC-01958 NOTE: 1995-99  YFM 350 WOLVERINE HAS TWO POSSIBLE STATORS, THIS STATOR HAS AND EXTERNAL DIAMETER OF 93MM.   ;OEM: 420296907, 420684850, 420685920, 420685634 " '],}
+
+
+#list all models
+list_models = [
+
+'Outlander 330 HO 2x4',
+'Outlander 330 HO 4x4',
+'Outlander 400 HO 2x4',
+'Outlander 400 HO 4x4',
+'Outlander 400 HO 4x4 XT',
+'Outlander 400 HO',
+'Outlander 400 HO XT',
+'Outlander 400 HO EFI',
+'Outlander 400 HO EFI XT',
+'Outlander 400 EFI XT',
+'Outlander 400 EFI',
+'Outlander Max 400 HO',
+'Outlander Max 400 HO XT',
+'Outlander Max 400 HO EFI',
+'Outlander Max 400 HO EFI XT',
+'Outlander Max 400 EFI XT',
+'Outlander Max 400 EFI',
+'Outlander 450',
+'Outlander 450 DPS',
+'Outlander 450 Mossy Oak Hunitng Edition',
+'Outlander 450 Mossy Oak Edition',
+'Outlander Max 450',
+'Outlander Max 450 DPS',
+'Outlander Max 450 6X6 DPS',
+'Outlander L 450',
+'Outlander L 450 DPS',
+'Outlander 500 HO 4x4 EFI',
+'Outlander 500 HO 4x4 EFI XT',
+'Outlander 500 HO 4x4 EFI XT-P',
+'Outlander 500 EFI XT',
+'Outlander 500 EFI',
+'Outlander 500 EFI DPS',
+'Outlander Max 500 HO EFI',
+'Outlander Max 500 HO EFI XT',
+'Outlander Max 500 HO EFI LTD',
+'Outlander Max 500 HO EFI XT-P',
+'Outlander Max 500 EFI XT',
+'Outlander Max 500 EFI',
+'Outlander Max 500 EFI DPS',
+'Renegade 500',
+'Outlander 570 DPS',
+'Outlander 570 XT',
+'Outlander 570',
+'Outlander 570 Mossy Oak Hunitng Edition',
+'Outlander 570 X mr',
+'Outlander 570 Mossy Oak Edition',
+'Outlander 570 mr',
+'Outlander L 570',
+'Outlander L 570 DPS',
+'Outlander L 570 Mossy Oak Hunting Edition',
+'Outlander L 570 LE',
+'Outlander L 570 X mr',
+'Outlander L Max 450',
+'Outlander L Max 500',
+'Outlander L Max 500 DPS',
+'Outlander L Max 450 DPS',
+'Outlander L Max 570',
+'Outlander L Max 570 DPS',
+'Renegade 570',
+'Renegade 570 X mr',
+'Outlander 650 HO EFI 4x4',
+'Outlander 650 HO EFI 4x4 XT',
+'Outlander 650 HO 4x4 EFI',
+'Outlander 650 HO 4x4 EFI XT',
+'Outlander 650 EFI XT-P',
+'Outlander 650 EFI XT',
+'Outlander 650 EFI',
+'Outlander 650 EFI DPS',
+'Outlander 650 X mr',
+'Outlander 650 6x6 XT',
+'Outlander 650',
+'Outlander 650 DPS',
+'Outlander 650 XT',
+'Outlander 650 6x6 DPS',
+'Outlander 650 North Edition',
+'Outlander 650 Mossy Oak Edition',
+'Renegade 650 X mr',
+'Outlander Max 650 HO EFI 4x4',
+'Outlander Max 650 HO EFI 4x4 XT',
+'Outlander Max 650 HO EFI',
+'Outlander Max 650 HO EFI XT',
+'Outlander Max 650 EFI XT-P',
+'Outlander Max 650 EFI XT',
+'Outlander Max 650 EFI',
+'Outlander Max 650 EFI DPS',
+'Outlander Max 650 DPS',
+'Outlander Max 650 XT',
+'Outlander Max 650 North Edition',
+'Outlander Max 650 6X6 DPS',
+'Outlander 800 HO EFI 4x4',
+'Outlander 800 HO EFI 4x4 XT',
+'Outlander 800 HO 4x4 EFI',
+'Outlander 800 HO 4x4 EFI XT',
+'Outlander 800R EFI XT-P',
+'Outlander 800R EFI X xc',
+'Outlander 800R EFI XT',
+'Outlander 800R EFI',
+'Outlander 800R EFI X mr',
+'Outlander 800R EFI DPS',
+'Outlander Max 800 HO EFI 4x4',
+'Outlander Max 800 HO EFI 4x4 XT',
+'Outlander Max 800 HO EFI',
+'Outlander Max 800 HO EFI LTD',
+'Outlander Max 800 HO EFI XT',
+'Outlander Max 800R EFI XT-P',
+'Outlander Max 800R EFI LTD',
+'Outlander Max 800R EFI XT',
+'Outlander Max 800R EFI',
+'Outlander Max 800R EFI DPS',
+'Renegade 800',
+'Renegade 800 X',
+'Renegade 800R',
+'Renegade 800R X xc',
+'Renegade 850',
+'Renegade 850 X xc',
+'Outlander 1000 EFI XT',
+'Outlander 1000 EFI',
+'Outlander 1000 EFI DPS',
+'Outlander 1000 EFI XT-P',
+'Outlander 1000 X mr',
+'Outlander 1000 6x6 XT',
+'Outlander 1000 DPS',
+'Outlander 1000 XT',
+'Outlander 1000 XT-P',
+'Outlander 1000 Mossy Oak Hunting Edition',
+'Outlander 1000 X xc',
+'Renegade 1000 EFI X xc',
+'Renegade 1000',
+'Renegade 1000 X xc',
+'Renegade 1000 X mr',
+'Renegade 1000R X xc'
+
+]
+
+#Range of Years
+years = list(range(2003, 2024))
+
+#Functions/Syntax to generate the Dataframe for each model
+
+def generate_df(model, data, year):
+    data_copy = data.copy()
+    data_copy['Model'] = model
+    data_copy['Year'] = year
+    return pd.DataFrame(data_copy)
+
+dfs=[]
+for year in years:
+    df1 = pd.concat([generate_df(model,data1, year) for model in list_models], ignore_index = True)
+    dfs.append(df1)
+    
+#Concatenate all DF's created
+final_df = pd.concat(dfs, ignore_index=True)
+
+#Display
+final_df
